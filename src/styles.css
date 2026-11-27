@@ -1,3 +1,4 @@
+/* 화면 전체에서 공유하는 배경색, 테두리색, 강조색, 글꼴을 정의한다. */
 :root {
   color-scheme: dark;
   font: 14px/1.5 system-ui, -apple-system, sans-serif;
@@ -10,6 +11,7 @@
   --mono: ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
+/* 기본 여백과 상자 크기를 맞추고 키보드 포커스, 활성 버튼, 비활성 버튼의 표시를 정한다. */
 * { box-sizing: border-box; }
 body { margin: 0; }
 button, input { font: inherit; }
@@ -32,6 +34,7 @@ button[aria-pressed='true'] {
 }
 button:disabled { cursor: default; opacity: .55; }
 
+/* 상단 브랜드 바와 CSS로 그린 지층 모양 아이콘이다. */
 .app-header {
   height: 65px;
   padding: 0 clamp(16px, 3.15vw, 52px);
@@ -57,6 +60,7 @@ button:disabled { cursor: default; opacity: .55; }
 .brand-mark span:nth-child(3) { width: 9px; opacity: .55; }
 .header-description { color: var(--muted); padding-left: 17px; border-left: 1px solid var(--border); font-size: 13px; }
 
+/* 작업 영역의 최대 너비, 제목, 조사 요약 배치를 정한다. */
 .workspace { max-width: 1760px; padding: 26px clamp(16px, 3.15vw, 52px) 30px; margin: 0 auto; }
 .workspace-heading {
   display: flex;
@@ -72,6 +76,7 @@ h1 { margin: 0; font-size: clamp(29px, 3.1vw, 43px); line-height: 1.12; letter-s
 .survey-summary span + span::before { content: '·'; margin-right: 12px; color: #86a29d; }
 .survey-summary span:first-child { color: var(--accent); }
 
+/* 왼쪽 레이어 패널, 가운데 3D 뷰어, 오른쪽 상세 패널을 세 열로 배치한다. */
 .explorer {
   display: grid;
   grid-template-columns: 216px minmax(0, 1fr) 252px;
@@ -88,6 +93,7 @@ h1 { margin: 0; font-size: clamp(29px, 3.1vw, 43px); line-height: 1.12; letter-s
 .panel-section { border-top: 1px solid var(--border); margin-top: 21px; padding-top: 18px; }
 .panel-note { margin: 12px 0 0; color: var(--muted); font-size: 12px; }
 
+/* 레이어 체크박스, 시추공 버튼 목록, 암석 범례의 배치와 색 표시다. */
 .layer-list { display: grid; }
 .layer-toggle { display: flex; align-items: center; gap: 9px; min-height: 37px; cursor: pointer; }
 .layer-toggle:hover { color: var(--accent); }
@@ -98,6 +104,7 @@ h1 { margin: 0; font-size: clamp(29px, 3.1vw, 43px); line-height: 1.12; letter-s
 .legend, .interval-list { padding: 0; margin: 0; list-style: none; }
 .legend li, .interval-list li { display: flex; gap: 9px; align-items: center; margin: 8px 0; font-size: 13px; }
 
+/* 3D 화면 영역의 경계를 설정하고 투명한 캔버스 뒤에 그라데이션을 둔다. */
 .viewport {
   grid-area: viewport;
   min-width: 0;
@@ -107,9 +114,11 @@ h1 { margin: 0; font-size: clamp(29px, 3.1vw, 43px); line-height: 1.12; letter-s
   overflow: hidden;
   background: radial-gradient(ellipse at 48% 30%, #365052 0%, #1b2c30 48%, #10191e 88%);
 }
+/* 캔버스가 뷰어 영역을 채운다. 놓고 있을 때와 드래그할 때 커서 모양이 달라진다. */
 .scene { position: absolute; inset: 0; }
 .scene canvas { display: block; width: 100%; height: 100%; cursor: grab; }
 .scene canvas:active { cursor: grabbing; }
+/* 캔버스 위에 툴바와 안내를 놓되, 버튼을 제외한 오버레이는 포인터 입력을 가로채지 않는다. */
 .viewport-toolbar, .viewport-footer {
   position: absolute;
   inset-inline: 15px;
@@ -135,6 +144,7 @@ h1 { margin: 0; font-size: clamp(29px, 3.1vw, 43px); line-height: 1.12; letter-s
 .viewport-footer .touch-instructions { display: none; }
 .viewport-footer .render-metrics { font: 10px/1.6 var(--mono); }
 .render-metrics span { color: var(--accent); }
+/* 로딩이나 WebGL 문제 안내를 3D 화면 중앙에 배치한다. */
 .scene-message {
   position: absolute;
   top: 50%;
@@ -149,6 +159,7 @@ h1 { margin: 0; font-size: clamp(29px, 3.1vw, 43px); line-height: 1.12; letter-s
   text-align: center;
 }
 
+/* 선택된 시추공 ID, 측정값, 깊이 구간 막대의 모양을 정한다. */
 .selection-name {
   display: flex;
   align-items: center;
@@ -167,13 +178,16 @@ h1 { margin: 0; font-size: clamp(29px, 3.1vw, 43px); line-height: 1.12; letter-s
 .interval-overview span { flex-basis: 0; }
 .interval-list { margin-top: 12px; }
 .interval-depth { margin-left: auto; white-space: nowrap; color: var(--muted); font: 11px/1.5 var(--mono); }
+/* 화면에서는 숨겨도 스크린 리더가 선택 안내 문구를 읽을 수 있도록 한다. */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
+/* 화면이 줄어들면 좌우 패널을 조금 좁혀 3D 화면의 폭을 확보한다. */
 @media (max-width: 1120px) {
   .explorer { grid-template-columns: 180px minmax(0, 1fr) 209px; }
   .layers-panel, .inspector-panel { padding: 17px 13px; }
 }
 
+/* 태블릿 너비에서는 뷰어를 위에 두고 아래에 좌우 패널을 나란히 배치한다. */
 @media (max-width: 880px) {
   .explorer {
     grid-template-columns: 1fr 1fr;
@@ -185,6 +199,7 @@ h1 { margin: 0; font-size: clamp(29px, 3.1vw, 43px); line-height: 1.12; letter-s
   .layers-panel, .inspector-panel { padding: 20px; }
 }
 
+/* 좁은 모바일 화면에서는 세 영역을 한 열로 쌓는다. */
 @media (max-width: 500px) {
   .workspace { padding-top: 19px; }
   .workspace-heading { margin-bottom: 16px; gap: 9px; }
@@ -192,6 +207,7 @@ h1 { margin: 0; font-size: clamp(29px, 3.1vw, 43px); line-height: 1.12; letter-s
   .inspector-panel { border-left: 0; border-top: 1px solid var(--border); }
   .hole-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
+/* 터치 중심 기기에서는 마우스 안내 대신 손가락 조작 안내를 보여준다. */
 @media (hover: none), (pointer: coarse) {
   .viewport-footer .desktop-instructions { display: none; }
   .viewport-footer .touch-instructions { display: block; }
